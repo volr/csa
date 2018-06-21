@@ -10,6 +10,18 @@ Stability: experimental
 This module uses connection-set algebra to describe connectivity between
 two entities [1]. The final product is a dependently typed 'AdjacencyMatrix'.
 
+Use:
+
+>>> toAdjacencyMatrix None :: L 2 2
+(matrix
+ [ 0.0, 0.0
+ , 0.0, 0.0 ] :: L 2 2)
+
+>>> toAdjacencyMatrix $ Minus (AllToAll 2) (OneToOne 1) :: L 2 2
+(matrix
+ [ 1.0, 2.0
+ , 2.0, 1.0 ] :: L 2 2)
+
 1: Mikael Djurfeldt. The Connection-set Algebra: a formalism for the
 representation of connectivity structure in neuronal network models,
 implementations in Python and C++, and their use in simulators,
@@ -26,19 +38,18 @@ type AdjacencyMatrix = L
 -- | An expression algebra tree (AST) that describes connections
 --   between two elements
 data Expr
-  = None
-  | AllToAll ℝ
-  | OneToOne ℝ
-  | Mask (ℝ -> ℝ -> ℝ)
-  | Plus Expr Expr
-  | Minus Expr Expr
+  = None -- ^ An empty connection (only 0s)
+  | AllToAll ℝ -- ^ Full connectivity with the given value
+  | OneToOne ℝ -- ^ One-to-one (diagonally) connectivity
+  | Mask (ℝ -> ℝ -> ℝ) -- ^ A masked connectivity given by a function
+  | Plus Expr Expr -- ^ Addition of two connectivity expressions
+  | Minus Expr Expr -- ^ Subtraction of two connectivity expressions
 
 -- | Converts an expression to an adjacency matrix by unrolling the
 --   expression tree from left to right
 toAdjacencyMatrix
   :: (KnownNat m, KnownNat n) => Expr -- ^ The expression to turn into a 'AdjacencyMatrix'
-  -- | The resulting adjacency matrix
-  -> AdjacencyMatrix m n
+  -> AdjacencyMatrix m n -- ^ The resulting adjacency matrix
 toAdjacencyMatrix expr = case expr of
   None -> build (\_ _ -> 0)
   Mask f -> build f
