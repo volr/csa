@@ -5,6 +5,7 @@ Module: CSA
 Description: Connectivity description using connection-set algebra
 License: MIT
 Maintainer: jensegholm@protonmail.com
+Stability: experimental
 
 This module uses connection-set algebra to describe connectivity between
 two entities [1]. The final product is a dependently typed 'AdjacencyMatrix'.
@@ -35,10 +36,7 @@ data Expr
 -- | Converts an expression to an adjacency matrix by unrolling the
 --   expression tree from left to right
 toAdjacencyMatrix
-  -- | The dimensions of the matrix as positive natural numbers
-  :: (KnownNat m, KnownNat n)
-  -- | The expression to turn into a 'AdjacencyMatrix'
-  => Expr
+  :: (KnownNat m, KnownNat n) => Expr -- ^ The expression to turn into a 'AdjacencyMatrix'
   -- | The resulting adjacency matrix
   -> AdjacencyMatrix m n
 toAdjacencyMatrix expr = case expr of
