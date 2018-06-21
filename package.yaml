@@ -8,7 +8,7 @@ license: MIT
 author: "Jens Egholm Pedersen"
 maintainer: "Jens Egholm Pedersen"
 synopsis: Connection-set algebra (CSA) library
-description: Library for the production of connection matrices through CSA.
+description: Library for the algebraic connection-set expressions
 category: Algebra
 
 extra-source-files:

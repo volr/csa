@@ -1,4 +1,6 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE Rank2Types #-}
+{-# LANGUAGE TypeOperators #-}
 
 -- | Tests for constructing and manipulating CSA matrices
 module Main where
@@ -23,4 +25,4 @@ main = do
 unitTests :: Spec
 unitTests = do
     it "Can construct an empty matrix" $
-      LA.size ((LA.build (\_ _ -> 0)) :: AdjacencyMatrix 2 3) `shouldBe` (2, 3)
+      LA.size (toAdjacencyMatrix None :: AdjacencyMatrix 2 3) `shouldBe` (2, 3)
