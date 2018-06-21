@@ -6,14 +6,24 @@ module CSA where
 import GHC.TypeLits
 import Numeric.LinearAlgebra.Static
 
--- | A connection between two types
-type Connection = L
+-- | An adjacency matrix describing connections in a directed graph
+type AdjacencyMatrix = L
 
--- | A mask to apply on a connection
-data Mask
-  = Mask (Int -> Int -> Bool)
-  | All
+-- | An expression algebra that constructs connections between two elements
+data Expr
+  = None
+  | AllToAll
   | OneToOne
+  | Mask (ℝ -> ℝ -> ℝ)
+  | Plus Expr Expr
+  | Minus Expr Expr
 
-none :: (KnownNat m, KnownNat n) => Connection m n
-none = build (\_ _ -> 0)
+-- Function: Run through matrix once
+--none :: (KnownNat m, KnownNat n) => AdjacencyMatrix m n
+--none = build (\_ _ -> 0)
+
+toAdjacencyMatrix :: (KnownNat m, KnownNat n) => Expr -> AdjacencyMatrix m n
+toAdjacencyMatrix expr = case expr of
+  None -> build (\_ _ -> 0)
+  Mask f -> build f
+  _ -> build (\_ _ -> 0)

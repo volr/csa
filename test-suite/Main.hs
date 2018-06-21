@@ -23,4 +23,4 @@ main = do
 unitTests :: Spec
 unitTests = do
     it "Can construct an empty matrix" $
-      LA.size (none :: Connection 2 3) `shouldBe` (2, 3)
+      LA.size ((LA.build (\_ _ -> 0)) :: AdjacencyMatrix 2 3) `shouldBe` (2, 3)
