@@ -8,7 +8,13 @@ license: MIT
 author: "Jens Egholm Pedersen"
 maintainer: "Jens Egholm Pedersen"
 synopsis: Connection-set algebra (CSA) library
-description: Library for the algebraic connection-set expressions
+description: "Library for algebraic connection-set expressions, built on
+             M. Djurfeldt's idea of connection-set algebra [1].
+             \n\n
+             1: Mikael Djurfeldt. The Connection-set Algebra: a formalism for the
+             representation of connectivity structure in neuronal network models,
+             implementations in Python and C++, and their use in simulators,
+             BMC Neuroscience, 2011. https://doi.org/10.1186/1471-2202-12-S1-P80"
 category: Algebra
 
 extra-source-files:

@@ -8,9 +8,13 @@ Maintainer: jensegholm@protonmail.com
 Stability: experimental
 
 This module uses connection-set algebra to describe connectivity between
-two entities [1]. The final product is a dependently typed 'AdjacencyMatrix'.
+two entities with a scalar ('Double') value. The library build on the concept
+of M. Djurfeldt's Connection-Set Algebar [1].
+The connection expressions can be compiled to a dependently typed
+'AdjacencyMatrix' from the "Numeric.LinearAlgebra.Static" package. Such
+a matrix can be used and exported as a regular n-dimensional vector.
 
-Use:
+Usage:
 
 >>> toAdjacencyMatrix None :: L 2 2
 (matrix
