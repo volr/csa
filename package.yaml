@@ -19,7 +19,7 @@ category: Algebra
 
 extra-source-files:
 - CHANGELOG.md
-- LICENSE.md
+- LICENSE
 - package.yaml
 - README.md
 - stack.yaml
@@ -28,7 +28,7 @@ ghc-options: -Wall
 
 library:
   dependencies:
-  - base
+  - base >= 4.10.0 && < 5
   - hmatrix
   source-dirs: library
 
@@ -37,7 +37,7 @@ tests:
     source-dirs: test-suite
     main: Main.hs
     dependencies:
-    - base
+    - base >= 4.10.0 && < 5
     - csa
     - hmatrix
     - hedgehog
