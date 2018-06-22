@@ -4,7 +4,7 @@
 name: csa
 version: '0.1.0'
 github: "volr/csa"
-license: MIT
+license: GPL
 author: "Jens Egholm Pedersen"
 maintainer: "Jens Egholm Pedersen"
 synopsis: Connection-set algebra (CSA) library
